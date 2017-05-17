@@ -8,8 +8,19 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+
+    private EditText txtTD;
+    private EditText txtInter;
+    private EditText txtYards;
+    private EditText txtCom;
+    private EditText txtAtem;
+    private TextView lblResult;
+    private Button btnCalc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +37,44 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        txtTD = (EditText) findViewById(R.id.txtTD);
+        txtInter = (EditText) findViewById(R.id.txtInter);
+        txtYards = (EditText) findViewById(R.id.txtYards);
+        txtCom = (EditText) findViewById(R.id.txtCom);
+        txtAtem = (EditText) findViewById(R.id.txtAtem);
+        lblResult = (TextView) findViewById(R.id.lblResult);
+
+        Button btnCalc = (Button) findViewById(R.id.btnCalc);
+        btnCalc.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                String touchdown =  txtTD.getText().toString();
+                String interceptions =  txtInter.getText().toString();
+                String yards =  txtYards.getText().toString();
+                String coms =  txtCom.getText().toString();
+                String atems =  txtAtem.getText().toString();
+
+                double resultA = ((Double.parseDouble(coms)/Double.parseDouble(atems) * 100) - 30) / 20;
+
+                double resultB = ((Double.parseDouble(touchdown)/Double.parseDouble(atems))*100)/5;
+
+                double resultC = (9.5 -(Double.parseDouble(interceptions)/Double.parseDouble(atems)*100))/4;
+
+                double resultD = ((Double.parseDouble(yards)/Double.parseDouble(atems)-3)/4);
+
+                //lblResult = Double.toString((resultA + resultB + resultC + resultD)/0.06);
+
+                double finalAnswer;
+
+                lblResult.setText(Double.toString((resultA + resultB + resultC + resultD)/0.06));
+
+
+
+            }
+
+        });
+
     }
 
     @Override
